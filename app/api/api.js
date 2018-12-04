@@ -10,7 +10,7 @@ router.get('/login', (req, res) => {
      * Todo: return signed JWT 
      */
 
-    res.send("Tesing login route");
+    res.send("Testing login route");
 });
 
 export default router;
