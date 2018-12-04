@@ -1,10 +1,10 @@
 {
-  "name": "graphql-server",
+  "name": "hackerbay-backend-test",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index",
+    "start": "nodemon --exec  babel-node index ",
     "test": "mocha  --require @babel/register",
     "build": "babel app --out-dir ./dist --source-maps",
     "serve": "node ./dist/index.js"
@@ -16,6 +16,7 @@
     "express": "^4.16.3",
     "express-graphql": "^0.7.1",
     "graphql": "^14.0.2",
+    "http-errors": "^1.7.1",
     "sharp": "^0.21.0",
     "sql": "^0.78.0"
   },
@@ -27,6 +28,7 @@
     "@babel/register": "^7.0.0",
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
+    "eslint": "^5.9.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.6"
   }
