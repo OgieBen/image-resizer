@@ -18,5 +18,5 @@ function onError(error){
 }
 
 function onListening(){
-    console.log("Server is listeneing on port: " + 'http://localhost:' + server.address().port);
+    console.log("Server is listeneing on port: " + server.address().port);
 }
