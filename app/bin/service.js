@@ -3,8 +3,6 @@ import http from 'http';
 import debug from 'debug';
 
 
-let _debug = debug('app:server');
-
 const port = process.env.PORT || 3000;
 
 app.set('port', port);
