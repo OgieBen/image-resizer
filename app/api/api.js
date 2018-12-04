@@ -1,16 +1,15 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
-router.get('/login', (req, res) => {
-   
-    /* 
-     * let userName = req.body.userName;
-     * let password = req.body.password;
-     * Todo: return signed JWT 
-     */
+router.get('/thumbnail', (req, res) => {
+    
+    res.send("Testing thumbnail route");
+});
 
-    res.send("Testing login route");
+router.patch('/patch', (req, res) => {
+    res.send("Testing patch route route");
 });
 
 export default router;
