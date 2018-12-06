@@ -1,30 +1,62 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
+import validUrl from 'valid-url';
+import sharp from 'sharp';
+import request from 'request';
+import jsonpatch from 'jsonpatch';
+import bodyparser from 'body-parser';
+import validator from 'validate-image-url';
 
 const router = express.Router();
+const jsonParser = bodyparser.json();
+const urlEncoded = bodyparser.urlencoded({"extended": false});
 
-router.post('/thumbnail', (req, res) => {
-    let thumbnail = req.body.image_url;
+router.post('/thumbnail', urlEncoded, (req, res) => {
+    let imageUrl = req.body.imageurl;
 
-    if (thumbnail === 'undefined' || thumbnail !== ''){
-        res.sendStatus(403);
+    if (imageUrl.match(/\.(jpeg|jpg|gif|png)$/) === null) {
+        res.sendStatus(400);
+
+        return;
+    }
+    
+    if (imageUrl === 'undefined' || 
+        imageUrl === '' ||
+        !validUrl.isWebUri(imageUrl)){
+
+        res.sendStatus(400);
+        
         return;
     }
 
-    res.download(thumbnail, (err) => {
-        if (err) {
-            return;
-        } 
-    })
+    res.type('image/png');
+
+    request.
+    get(imageUrl).
+    pipe(sharp().
+    resize(50, 50, {'fit': 'fill'}).
+    png()).
+    pipe(res);
 });
 
-router.post('/patch', (req, res) => {
+router.post('/patch', jsonParser, (req, res) => {
 
+    let patch = req.body.op;
     let obj = req.body.opdata;
-    let patch = req.body.patch;
+
+    if (obj === 'undefined' || typeof obj !== 'object' || patch === 'undefined' || typeof patch !== 'object'){
+        res.sendStatus(400);
+        
+        return;
+    }
     
-    res.send("Testing patch route route");
+    try{
+        res.json(jsonpatch.apply_patch(obj, [patch]));
+    }catch(err){
+        res.sendStatus(400);
+    }
+    
 });
+
 
 export default router;
 
