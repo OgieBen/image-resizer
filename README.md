@@ -1,7 +1,7 @@
 # Image Resizer 
 
 
-Slack Demo is just an app that has basic features from stackoverflow.
+ A very simple node app that resizes photo to a 50x50 thumbnail. 
 
 # Tools
     - docker
