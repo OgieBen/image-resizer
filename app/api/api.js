@@ -4,11 +4,20 @@ import sharp from 'sharp';
 import request from 'request';
 import jsonpatch from 'jsonpatch';
 import bodyparser from 'body-parser';
-import validator from 'validate-image-url';
+
 
 const router = express.Router();
 const jsonParser = bodyparser.json();
 const urlEncoded = bodyparser.urlencoded({"extended": false});
+
+/**
+ * Api end point that resizes an image to a 
+ *  50X50 thumbanail
+ * 
+ * @method POST 
+ * 
+ * @returns Image
+ */
 
 router.post('/thumbnail', urlEncoded, (req, res) => {
     let imageUrl = req.body.imageurl;
@@ -38,6 +47,14 @@ router.post('/thumbnail', urlEncoded, (req, res) => {
     pipe(res);
 });
 
+/**
+ * A simple api that aplies a json
+ * patch to a json object
+ * 
+ * @method POST 
+ * 
+ * @returns Object
+ */
 router.post('/patch', jsonParser, (req, res) => {
 
     let patch = req.body.op;
