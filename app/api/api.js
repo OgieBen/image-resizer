@@ -12,11 +12,11 @@ const urlEncoded = bodyparser.urlencoded({"extended": false});
 
 /**
  * Api end point that resizes an image to a 
- *  50X50 thumbanail
+ * 50X50 thumbanail
  * 
- * @method POST 
+ * @method {POST} 
  * 
- * @returns Image
+ * @returns {Image}
  */
 
 router.post('/thumbnail', urlEncoded, (req, res) => {
@@ -51,7 +51,7 @@ router.post('/thumbnail', urlEncoded, (req, res) => {
  * A simple api that aplies a json
  * patch to a json object
  * 
- * @method POST 
+ * @method {POST} 
  * 
  * @returns Object
  */
